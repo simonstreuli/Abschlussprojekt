@@ -1,6 +1,8 @@
 const router = require("express").Router();
+const User = require("./models/User");
 
-router.get("/", (req, res) => {
+//Register
+router.get("/register", (req, res) => {
   res.send("auth route");
 });
 

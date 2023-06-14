@@ -9,12 +9,12 @@ export default function Navbar() {
       <span className="logo"><img src={logo} alt="Logo" className="logo-img" /></span>
     </div>
     <div className="navbarCenter">
-    </div>
-    <div className="navbarRight">
-      <div className="navbarlinks">
+    <div className="navbarlinks">
        <span className="navbar-link">Home</span>
         <span className="navbar-link">Timeline</span>
       </div>
+    </div>
+    <div className="navbarRight">
       <div className="navbar-icons">
         <div className="navbar-icon">
           <Chat />

@@ -1,9 +1,83 @@
 .navbar {
+  color: white;
   height: 50px;
   width: 100%;
   background-color: #3f99d1;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.navbarLeft {
+  flex: 3;
+}
+
+.navbarCenter {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navbarRight {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .logo-img {
-  width: 7.5%;
+  width: 150px;
+  height: auto;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.navbarlinks {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 115%;
+}
+
+.navbar-link {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.navbar-icon {
+  position: relative;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.navbarbadge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.navbar-profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 30px;
+  cursor: pointer;
+  object-fit: cover;
 }

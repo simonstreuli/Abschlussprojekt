@@ -2,3 +2,7 @@
   flex: 5;
   text-align: center;
 }
+
+.feedWraper {
+  padding: 20px;
+}

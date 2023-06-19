@@ -7,9 +7,16 @@ const morgan = require("morgan");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const cors = require("cors");
 
 dotenv.config();
 
+// Erlaubt Zugriff von localhost:3000
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 // Database connection
 const PORT = process.env.PORT || 6001;
 mongoose

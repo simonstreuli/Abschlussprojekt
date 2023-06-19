@@ -1,8 +1,4 @@
 ## LinkUp Project
 
 **Social Media Application**
-_from Simon Streuli_
-
-```
-
-```
+_by Simon Streuli_

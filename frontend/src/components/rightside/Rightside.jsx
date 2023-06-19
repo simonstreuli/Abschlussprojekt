@@ -1,7 +1,9 @@
-import "./rightside.css"
+import "./rightside.css";
 
-export default function rightside() {
+export default function Rightside() {
   return (
-    <div className="rightside">Rightside</div>
-  )
+    <div className="rightside">
+
+    </div>
+  );
 }

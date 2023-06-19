@@ -1,17 +1,27 @@
-import "./login.css"
+import "./login.css";
 
 export default function Login() {
   return (
     <div className="login">
-        <div className="wrapper">
-            <div className="loginLeft">
-                <img src="../../assets/logo.png" alt="" className="logo" />
-                <span className="loginDesc">.....asdas</span>
-            </div>
-            <div className="loginRight">
-                <div className="loginBox"></div>
-            </div>
+      <div className="loginWrapper">
+        <div className="loginLeft">
+          <h3 className="loginLogo">LinkUp</h3>
+          <span className="loginDesc">
+            Discover, Connect, Share!
+          </span>
         </div>
+        <div className="loginRight">
+          <div className="loginBox">
+            <input placeholder="Email" className="loginInput" />
+            <input placeholder="Password" className="loginInput" />
+            <button className="loginButton">Log In</button>
+            <span className="loginForgot">Forgot Password?</span>
+            <button className="loginRegisterButton">
+              Create a New Account
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

@@ -1,18 +1,25 @@
 import "./post.css"
 import {MoreVert, FavoriteBorderOutlined, ThumbUpOutlined} from "@material-ui/icons"
 import { Users } from "../../dummyData"
+import { useState } from "react"
 
 
 export default function Post({post}) {
-
+    const [like,setLike] = useState(post.like)
+    const [isLiked,setIsLiked] = useState(false)
+  
+    const likeHandler =()=>{
+      setLike(isLiked ? like-1 : like+1)
+      setIsLiked(!isLiked)
+    }
+    
   return (
     <div className="post">
         <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img src="/assets/person/1.jpeg" alt="" className="postProfileImg" />
-                    <span className="postUsername">{Users.filter((u)=>u.id === post.userId[0].username)}
-</span>
+                    <img src={Users.filter((u) => u.id === post.userId)[0].profilePicture}alt="" className="postProfileImg" />
+                    <span className="postUsername">{Users.filter((u) => u.id === post.userId)[0].username}</span>
                     <span className="postDate">{post.date}</span>
 
                 </div>
@@ -26,9 +33,9 @@ export default function Post({post}) {
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
-                    <FavoriteBorderOutlined/>
-                    <ThumbUpOutlined></ThumbUpOutlined>
-                    <span className="postLikeCounter">{post.like} people liked</span>
+                    <FavoriteBorderOutlined onClick={likeHandler}/>
+                    <ThumbUpOutlined onClick={likeHandler}/>
+                    <span className="postLikeCounter">{like} people liked</span>
 
                 </div>
                 <div className="postBottomRight"></div>

@@ -7,12 +7,13 @@ import { useState } from "react"
 export default function Post({post}) {
     const [like,setLike] = useState(post.like)
     const [isLiked,setIsLiked] = useState(false)
-  
+    const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
+
     const likeHandler =()=>{
       setLike(isLiked ? like-1 : like+1)
       setIsLiked(!isLiked)
     }
-    
+    console.log(post.photo)
   return (
     <div className="post">
         <div className="postWrapper">
@@ -29,7 +30,7 @@ export default function Post({post}) {
 
             <div className="postCenter">
                 <span className="postText">{post?.desc}</span>
-                <img className="postImg"src={post.photo} alt="" />
+                <img className="postImg"src={publicFolder + post.photo} alt="" />
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">

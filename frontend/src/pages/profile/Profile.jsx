@@ -1,17 +1,25 @@
 import React from "react";
 import "./profile.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import Feed from "../../components/feed/Feed";
 
 export default function Profile() {
-  const user = {
-    username: "John Doe",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    city: "New York",
-    from: "Los Angeles",
-    relationship: "Single",
-  };
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    const fetchUser = async () => {
+      axios
+        .get("/users/" + post.userId)
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => console.error(err));
+    };
+    fetchUser();
+  }, [post.userId]);
 
   return (
     <>
@@ -33,7 +41,7 @@ export default function Profile() {
         </div>
       </div>
       <div className="feedContainer">
-        <Feed />
+        <Feed username="john" />
       </div>
     </>
   );

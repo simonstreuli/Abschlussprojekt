@@ -1,0 +1,63 @@
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.profileMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.feedContainer {
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profilePicture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.description {
+  font-size: 16px;
+  color: gray;
+  margin-top: 5px;
+}
+
+.userDetails {
+  font-size: 14px;
+  color: #777777;
+  margin-top: 10px;
+}
+
+.profilePosts {
+  /* Füge hier weitere CSS-Stile für den Feed hinzu */
+}

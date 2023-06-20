@@ -55,7 +55,9 @@ export default function Login() {
               ref={password}
               minLength={5}
             />
-            <button className="loginButton">Log In</button>
+            <button className="loginButton">
+              {isFetching ? "loading" : "Login"}
+            </button>
             <span className="loginForgot">Forgot Password?</span>
             <Link to="/register">
               <button className="loginRegisterButton">

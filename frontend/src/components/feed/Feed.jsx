@@ -2,23 +2,24 @@ import "./feed.css";
 import { useEffect, useState } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
-// import {Posts} from "../../dummyData"
 import axios from "axios";
 
-export default function Feed() {
+export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      axios
-        .get("/posts/timeline/64904bb300001200acf15f73")
-        .then((res) => {
-          setPosts(res.data);
+      const res = username
+        ? await axios.get("/posts/profile/" + username)
+        : await axios.get("posts/timeline/64915785e4b5933742f574c6");
+      setPosts(
+        res.data.sort((p1, p2) => {
+          return new Date(p2.createdAt) - new Date(p1.createdAt);
         })
-        .catch((err) => console.error(err));
+      );
     };
     fetchPosts();
-  }, []);
+  }, [username]);
 
   return (
     <div className="feed">

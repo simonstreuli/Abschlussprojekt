@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import Feed from "../../components/feed/Feed";
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
-
   const [user, setUser] = useState({});
+  const { username } = useParams();
+
   useEffect(() => {
     const fetchUser = async () => {
-      axios
-        .get("/users/" + post.userId)
-        .then((res) => {
-          setUser(res.data);
-        })
-        .catch((err) => console.error(err));
+      try {
+        const res = await axios.get(`/users?username=${username}`);
+        setUser(res.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
     fetchUser();
-  }, [post.userId]);
+  }, [username]);
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function Profile() {
             </div>
             <div className="profileInfo">
               <h2 className="username">{user.username}</h2>
-              <p className="description">{user.description}</p>
+              <p className="description">{user.desc}</p>
               <p className="userDetails">City: {user.city}</p>
               <p className="userDetails">From: {user.from}</p>
               <p className="userDetails">Relationship: {user.relationship}</p>
@@ -41,7 +42,7 @@ export default function Profile() {
         </div>
       </div>
       <div className="feedContainer">
-        <Feed username="john" />
+        <Feed username={username} />
       </div>
     </>
   );

@@ -1,25 +1,59 @@
 import "./login.css";
+import { useRef } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Login() {
+  const email = useRef();
+  const password = useRef();
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(email.current.value);
+  };
+
+  const loginCall = async (userLogin, dispatch) => {
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("auth/login", userLogin);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    } catch (err) {
+      console.log("Error: " + err);
+    }
+  };
+
   return (
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">LinkUp</h3>
-          <span className="loginDesc">
-            Discover, Connect, Share!
-          </span>
+          <span className="loginDesc">Discover, Connect, Share!</span>
         </div>
+
         <div className="loginRight">
-          <div className="loginBox">
-            <input  required placeholder="Email" className="loginInput" />
-            <input required type="password" placeholder="Password" className="loginInput" />
+          <form onSubmit={handleClick} className="loginBox">
+            <input
+              required
+              type="Email"
+              placeholder="Email"
+              className="loginInput"
+              ref={email}
+            />
+            <input
+              required
+              type="password"
+              placeholder="Password"
+              className="loginInput"
+              ref={password}
+              minLength={5}
+            />
             <button className="loginButton">Log In</button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              Create a New Account
-            </button>
-          </div>
+            <Link to="/register">
+              <button className="loginRegisterButton">
+                Create a New Account
+              </button>
+            </Link>
+          </form>
         </div>
       </div>
     </div>

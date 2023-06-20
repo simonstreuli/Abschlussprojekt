@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
+  console.log(post);
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});

@@ -29,11 +29,18 @@ export default function Profile() {
         <div className="profileMain">
           <div className="profileHeader">
             <div className="profilePicture">
-              <img src={publicFolder + "person/1.jpeg"} alt="Profile" />
+              <img
+                src={
+                  user.profileUserImg
+                    ? publicFolder + user.profileUserImg
+                    : publicFolder + "person/noAvatar.png"
+                }
+                alt="Profile"
+              />
             </div>
             <div className="profileInfo">
               <h2 className="username">{user.username}</h2>
-              <p className="description">{user.desc}</p>
+              <p className="description">Description: {user.desc}</p>
               <p className="userDetails">City: {user.city}</p>
               <p className="userDetails">From: {user.from}</p>
               <p className="userDetails">Relationship: {user.relationship}</p>

@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
+  console.log(posts);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -20,6 +21,7 @@ export default function Feed({ username }) {
     };
     fetchPosts();
   }, [username]);
+  console.log("2" + posts);
 
   return (
     <div className="feed">

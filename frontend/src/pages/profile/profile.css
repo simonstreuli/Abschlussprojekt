@@ -58,6 +58,66 @@
   margin-top: 10px;
 }
 
-.profilePosts {
-  /* Füge hier weitere CSS-Stile für den Feed hinzu */
+.friendsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.friendsContainer h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.friendsList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.friend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  height: 180px;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  margin: 10px;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.friend:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.friend img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.friend p {
+  font-size: 16px;
+  color: gray;
+  text-align: center;
+  margin: 0;
+}
+
+#friendstitle {
+  margin-left: 15px;
+}
+
+.link {
+  text-decoration: none;
 }

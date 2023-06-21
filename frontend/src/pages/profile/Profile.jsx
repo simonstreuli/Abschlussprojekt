@@ -3,11 +3,12 @@ import "./profile.css";
 import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import Feed from "../../components/feed/Feed";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Profile() {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
+  const [friends, setFriends] = useState([]);
   const { username } = useParams();
 
   useEffect(() => {
@@ -21,6 +22,18 @@ export default function Profile() {
     };
     fetchUser();
   }, [username]);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        const friendList = await axios.get("/users/friends/" + user._id);
+        setFriends(friendList.data);
+      } catch (error) {
+        console.log("Error" + error);
+      }
+    };
+    getFriends();
+  }, [user._id]);
 
   return (
     <>
@@ -44,6 +57,28 @@ export default function Profile() {
               <p className="userDetails">City: {user.city}</p>
               <p className="userDetails">From: {user.from}</p>
               <p className="userDetails">Relationship: {user.relationship}</p>
+            </div>
+          </div>
+          <h2 id="friendstitle">Friends</h2>
+
+          <div className="friendsContainer">
+            <div className="friendsList">
+              {friends.map((friend) => (
+                <Link to={"/profile/" + friend.username} className="link">
+                  <div className="friend" key={friend.id}>
+                    <img
+                      className="profilePicture"
+                      src={
+                        user.profilePicture
+                          ? publicFolder + friend.profilePicture
+                          : publicFolder + "person/noAvatar.png"
+                      }
+                      alt="Profile"
+                    />
+                    <p>{friend.username}</p>
+                  </div>{" "}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

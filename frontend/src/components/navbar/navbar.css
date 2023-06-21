@@ -7,6 +7,7 @@
   align-items: center;
   position: sticky;
   top: 0;
+  padding: 10px;
 }
 
 .navbarLeft {
@@ -28,7 +29,7 @@
 }
 
 .logo-img {
-  width: 150px;
+  width: 160px;
   height: auto;
   margin-left: 20px;
   cursor: pointer;
@@ -42,6 +43,8 @@
 }
 
 .navbar-link {
+  color: white;
+  text-decoration: none;
   margin-right: 20px;
   cursor: pointer;
 }

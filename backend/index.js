@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const path = require("path");
 const cors = require("cors");
 const multer = require("multer");
 
@@ -30,6 +31,8 @@ mongoose
   })
   .catch((error) => console.log(`${error} did not connect`));
 
+app.use("/imges", express.static(path.join(__dirname, "public/images")));
+
 //Middleware
 app.use(express.json());
 app.use(helmet());
@@ -43,7 +46,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-const upload = multer();
+const upload = multer({ storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
     return res.status(200).json("File upload successful");

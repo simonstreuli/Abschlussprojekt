@@ -90,3 +90,7 @@
 .shareButton:hover {
   background-color: #297bad;
 }
+
+#file {
+  display: none;
+}

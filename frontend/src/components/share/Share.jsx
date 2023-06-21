@@ -6,11 +6,14 @@ import {
 } from "@material-ui/icons";
 import "./share.css";
 import { useContext } from "react";
+import { useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Share() {
+  const description = useRef();
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
+  const [file, setFile] = useState(null);
   return (
     <div className="share">
       <div className="shareWrapper">
@@ -26,18 +29,25 @@ export default function Share() {
           />
           <input
             type="text"
-            placeholder="Placeholder"
+            placeholder="What's going on right now"
             name=""
             id=""
             className="shareInput"
+            ref={description}
           />
         </div>
         <hr className="shareHr" />
-        <div className="shareBottom">
-          <div className="shareOptions">
+        <form className="shareBottom">
+          <label htmlFor="file" className="shareOptions">
             <div className="shareOption">
               <AddPhotoAlternateOutlined className="shareIcon" />
               <span className="sharedOptionText">Photo/Video</span>
+              <input
+                type="file"
+                accept=".jpg, .png, jpeg"
+                id="file"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
             <div className="shareOption">
               <LabelOutlined className="shareIcon" />
@@ -51,9 +61,9 @@ export default function Share() {
               <EmojiEmotionsOutlined className="shareIcon" />
               <span className="sharedOptionText">Feelings</span>
             </div>
-          </div>
+          </label>
           <button className="shareButton">Post</button>
-        </div>
+        </form>
       </div>
     </div>
   );

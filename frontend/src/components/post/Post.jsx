@@ -70,7 +70,6 @@ export default function Post({ post }) {
         <div className="postBottom">
           <div className="postBottomLeft">
             <FavoriteBorderOutlined onClick={likeHandler} />
-            <ThumbUpOutlined onClick={likeHandler} />
             <span className="postLikeCounter">{like} people liked</span>
           </div>
           <div className="postBottomRight"></div>

@@ -7,6 +7,7 @@ import {
 import "./share.css";
 import { useContext } from "react";
 import { useRef, useState } from "react";
+import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Share() {
@@ -14,6 +15,20 @@ export default function Share() {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState(null);
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    const newPost = {
+      userId: user.id,
+      description: description.current.value,
+    };
+    try {
+      await axios.post("/posts", newPost);
+    } catch (error) {
+      console.log("Error" + error);
+    }
+  };
+
   return (
     <div className="share">
       <div className="shareWrapper">
@@ -37,7 +52,7 @@ export default function Share() {
           />
         </div>
         <hr className="shareHr" />
-        <form className="shareBottom">
+        <form className="shareBottom" onSubmit={submitHandler}>
           <label htmlFor="file" className="shareOptions">
             <div className="shareOption">
               <AddPhotoAlternateOutlined className="shareIcon" />
@@ -62,7 +77,9 @@ export default function Share() {
               <span className="sharedOptionText">Feelings</span>
             </div>
           </label>
-          <button className="shareButton">Post</button>
+          <button className="shareButton" type="submit">
+            Post
+          </button>
         </form>
       </div>
     </div>

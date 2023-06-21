@@ -32,7 +32,7 @@ mongoose
   })
   .catch((error) => console.log(`${error} did not connect`));
 
-app.use("/imges", express.static(path.join(__dirname, "public/images")));
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 //Middleware
 app.use(express.json());

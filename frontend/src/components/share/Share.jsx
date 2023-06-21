@@ -11,22 +11,32 @@ import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Share() {
-  const description = useRef();
+  const desc = useRef();
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState(null);
 
-  const submitHandler = async (event) => {
-    event.preventDefault();
+  const submitHandler = async (e) => {
+    e.preventDefault();
     const newPost = {
-      userId: user.id,
-      description: description.current.value,
+      userId: user._id,
+      desc: desc.current.value,
     };
+    if (file) {
+      const data = new FormData();
+      const fileName = file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+      console.log(newPost);
+      try {
+        await axios.post("/upload", data);
+      } catch (err) {}
+    }
     try {
       await axios.post("/posts", newPost);
-    } catch (error) {
-      console.log("Error" + error);
-    }
+      window.location.reload();
+    } catch (err) {}
   };
 
   return (
@@ -48,7 +58,7 @@ export default function Share() {
             name=""
             id=""
             className="shareInput"
-            ref={description}
+            ref={desc}
           />
         </div>
         <hr className="shareHr" />

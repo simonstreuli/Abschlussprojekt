@@ -20,6 +20,7 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
+
 // Database connection
 const PORT = process.env.PORT || 6001;
 mongoose

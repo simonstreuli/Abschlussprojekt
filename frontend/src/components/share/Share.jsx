@@ -74,18 +74,6 @@ export default function Share() {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
-            <div className="shareOption">
-              <LabelOutlined className="shareIcon" />
-              <span className="sharedOptionText">Tag</span>
-            </div>
-            <div className="shareOption">
-              <RoomOutlined className="shareIcon" />
-              <span className="sharedOptionText">Location</span>
-            </div>
-            <div className="shareOption">
-              <EmojiEmotionsOutlined className="shareIcon" />
-              <span className="sharedOptionText">Feelings</span>
-            </div>
           </label>
           <button className="shareButton" type="submit">
             Post

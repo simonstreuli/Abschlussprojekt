@@ -41,21 +41,27 @@ router.delete("/:id", async (req, res) => {
 });
 
 //get user by id or by usename
+const mongoose = require("mongoose");
+
 router.get("/", async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
-  try {
-    let user;
-    if (userId) {
-      user = await User.findById(userId);
-    } else {
-      user = await User.findOne({ username: username });
+  let user;
+  if (userId) {
+    // Überprüfen, ob userId eine gültige ObjectId ist
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json("Ungültige Benutzer-ID");
     }
-    const { password, updatedAt, ...other } = user._doc;
-    res.status(200).json(other);
-  } catch (err) {
-    res.status(500).json("Error " + err);
+    user = await User.findById(userId);
+  } else {
+    user = await User.findOne({ username: username });
   }
+  if (!user) {
+    // Benutzer nicht gefunden
+    return res.status(404).json("Benutzer nicht gefunden");
+  }
+  const { password, updatedAt, ...other } = user._doc;
+  res.status(200).json(other);
 });
 
 //follow user

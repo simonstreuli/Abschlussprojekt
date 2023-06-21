@@ -22,6 +22,9 @@ export default function Navbar() {
           <Link to="/" className="navbar-link">
             <span className="navbar-link">Home</span>
           </Link>
+          <Link to="/explore" className="navbar-link">
+            <span className="navbar-link">Explore</span>
+          </Link>
         </div>
       </div>
       <div className="navbarRight">

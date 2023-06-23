@@ -1,15 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./profile.css";
 import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import Feed from "../../components/feed/Feed";
 import { Link, useParams } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import AddIcon from "@mui/icons-material/Add";
+import { Remove } from "@material-ui/icons";
 
 export default function Profile() {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
   const [friends, setFriends] = useState([]);
   const { username } = useParams();
+  const { user: currentUser } = useContext(AuthContext);
+  const [followed, setFollowed] = useState(false);
+
+  useEffect(() => {
+    const followingsArray = Array.isArray(currentUser.followings)
+      ? currentUser.followings
+      : [];
+    const isFollowing = followingsArray.includes(user?.id);
+    setFollowed(isFollowing);
+  }, [currentUser, user.id]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -35,11 +48,35 @@ export default function Profile() {
     getFriends();
   }, [user._id]);
 
+  const handleClick = async () => {
+    try {
+      if (followed) {
+        await axios.put("/users/" + user._id + "/follow", {
+          userId: currentUser._id,
+        });
+      } else {
+        await axios.put("/users/" + user._id + "/unfollow", {
+          userId: currentUser._id,
+        });
+      }
+    } catch (err) {
+      console.log("Error");
+    }
+    setFollowed(!followed);
+  };
+
   return (
     <>
       <Navbar />
       <div className="profileContainer">
         <div className="profileMain">
+          {user.username !== currentUser.username && (
+            <button className="followBtn" onClick={handleClick}>
+              {followed ? "Unfollow" : "Follow"}
+              {followed ? <Remove /> : <AddIcon />}
+            </button>
+          )}
+
           <div className="profileHeader">
             <div className="profilePicture">
               <img
@@ -60,7 +97,6 @@ export default function Profile() {
             </div>
           </div>
           <h2 id="friendstitle">Friends</h2>
-
           <div className="friendsContainer">
             <div className="friendsList">
               {friends.map((friend) => (

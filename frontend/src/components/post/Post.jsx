@@ -26,7 +26,7 @@ export default function Post({ post }) {
       setUser(res.data);
     };
     fetchUser();
-  }, [post.userId]);
+  }, [post.userId, currentUser._id]);
 
   // check if post is already liked
   useEffect(() => {

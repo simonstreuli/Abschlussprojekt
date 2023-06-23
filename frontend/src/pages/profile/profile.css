@@ -7,14 +7,14 @@
 .profileMain {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Geändert auf flex-start */
+  align-items: flex-start;
   max-width: 800px;
   width: 100%;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Hinzugefügt: Schatten */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .feedContainer {
@@ -30,6 +30,7 @@
 .profileHeader {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
@@ -43,7 +44,7 @@
 .username {
   font-size: 24px;
   font-weight: bold;
-  margin-left: 20px;
+  margin: 0;
 }
 
 .description {
@@ -120,4 +121,27 @@
 
 .link {
   text-decoration: none;
+}
+
+.followBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555555;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.followBtn:hover {
+  background-color: #dddddd;
+}
+
+.followBtn svg {
+  margin-right: 4px;
 }

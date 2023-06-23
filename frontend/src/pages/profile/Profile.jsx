@@ -13,7 +13,7 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [friends, setFriends] = useState([]);
   const { username } = useParams();
-  const { user: currentUser } = useContext(AuthContext);
+  const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
 
   useEffect(() => {
@@ -51,13 +51,15 @@ export default function Profile() {
   const handleClick = async () => {
     try {
       if (followed) {
-        await axios.put("/users/" + user._id + "/follow", {
-          userId: currentUser._id,
-        });
-      } else {
         await axios.put("/users/" + user._id + "/unfollow", {
           userId: currentUser._id,
         });
+        dispatch({ type: "UNFOLLOW", payload: user._id });
+      } else {
+        await axios.put("/users/" + user._id + "/follow", {
+          userId: currentUser._id,
+        });
+        dispatch({ type: "FOLLOW", payload: user._id });
       }
     } catch (err) {
       console.log("Error");
@@ -72,11 +74,10 @@ export default function Profile() {
         <div className="profileMain">
           {user.username !== currentUser.username && (
             <button className="followBtn" onClick={handleClick}>
-              {followed ? "Follow" : "Unfollow"}
-              {followed ? <AddIcon /> : <Remove />}
+              {followed ? "Unfollow" : "Follow"}
+              {followed ? <Remove /> : <AddIcon />}
             </button>
           )}
-
           <div className="profileHeader">
             <div className="profilePicture">
               <img

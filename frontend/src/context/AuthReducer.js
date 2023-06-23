@@ -1,4 +1,4 @@
-export default function AuthReducer(state, action) {
+const AuthReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_START":
       return {
@@ -16,9 +16,29 @@ export default function AuthReducer(state, action) {
       return {
         user: null,
         isFetching: false,
-        error: action.payload,
+        error: true,
+      };
+    case "FOLLOW":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          followings: [...state.user.followings, action.payload],
+        },
+      };
+    case "UNFOLLOW":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          followings: state.user.followings.filter(
+            (following) => following !== action.payload
+          ),
+        },
       };
     default:
       return state;
   }
-}
+};
+
+export default AuthReducer;

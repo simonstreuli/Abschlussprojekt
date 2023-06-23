@@ -1,7 +1,5 @@
-import "./leftside.css"
+import "./leftside.css";
 
 export default function Leftside() {
-  return (
-    <div className="leftside">Leftside</div>
-  )
+  return <div className="leftside"></div>;
 }

@@ -28,20 +28,6 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbarRight">
-        <div className="navbar-icons">
-          <div className="navbar-icon">
-            <Chat />
-            <span className="navbarbadge">1</span>
-          </div>
-          <div className="navbar-icon">
-            <Notifications />
-            <span className="navbarbadge">1</span>
-          </div>
-          <div className="navbar-icon">
-            <Person />
-            <span className="navbarbadge">1</span>
-          </div>
-        </div>
         <Link to={`/profile/${user.username}`}>
           <img
             src={

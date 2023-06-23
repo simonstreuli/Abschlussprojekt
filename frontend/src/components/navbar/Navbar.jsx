@@ -1,6 +1,6 @@
 import "./navbar.css";
 import logo from "../../assets/logo.png";
-import { Person, Chat, Notifications } from "@material-ui/icons";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
@@ -28,6 +28,11 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbarRight">
+        <div className="navbar-icons">
+          <div className="navbar-icon">
+            <LogoutIcon />
+          </div>
+        </div>
         <Link to={`/profile/${user.username}`}>
           <img
             src={

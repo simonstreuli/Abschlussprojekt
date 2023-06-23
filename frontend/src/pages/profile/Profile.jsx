@@ -41,12 +41,12 @@ export default function Profile() {
       try {
         const friendList = await axios.get("/users/friends/" + user._id);
         setFriends(friendList.data);
-      } catch (error) {
-        console.log("Error" + error);
+      } catch (err) {
+        console.log(err);
       }
     };
     getFriends();
-  }, [user._id]);
+  }, [user]);
 
   const handleClick = async () => {
     try {
@@ -72,8 +72,8 @@ export default function Profile() {
         <div className="profileMain">
           {user.username !== currentUser.username && (
             <button className="followBtn" onClick={handleClick}>
-              {followed ? "Unfollow" : "Follow"}
-              {followed ? <Remove /> : <AddIcon />}
+              {followed ? "Follow" : "Unfollow"}
+              {followed ? <AddIcon /> : <Remove />}
             </button>
           )}
 

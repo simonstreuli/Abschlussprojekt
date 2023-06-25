@@ -4,10 +4,16 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
+import { Logout } from "../../context/AuthActions";
 
 export default function Navbar() {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    dispatch(Logout());
+  };
+
   return (
     <div className="navbar">
       <div className="navbarLeft">
@@ -29,7 +35,7 @@ export default function Navbar() {
       </div>
       <div className="navbarRight">
         <div className="navbar-icons">
-          <div className="navbar-icon">
+          <div className="navbar-icon" onClick={handleLogout}>
             <LogoutIcon />
           </div>
         </div>

@@ -8,6 +8,7 @@ const initState = {
 };
 
 export const AuthContext = createContext(initState);
+export { Logout } from "./AuthActions";
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initState);

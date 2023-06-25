@@ -43,14 +43,21 @@ const UserSchema = new mongoose.Schema(
     desc: {
       type: String,
       max: 50,
+      default: "My Description",
     },
     from: {
       type: String,
       max: 50,
+      default: "Where im from",
+    },
+    city: {
+      type: String,
+      max: 50,
+      default: "My City",
     },
     relationship: {
-      type: Number,
-      enum: [1, 2, 3],
+      type: String,
+      default: "My Relationship",
     },
   },
   { timestamps: true }

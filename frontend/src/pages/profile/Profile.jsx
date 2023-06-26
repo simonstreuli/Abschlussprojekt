@@ -7,6 +7,10 @@ import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import AddIcon from "@mui/icons-material/Add";
 import { Remove } from "@material-ui/icons";
+import EditIcon from "@mui/icons-material/Edit";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PublicIcon from "@mui/icons-material/Public";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 export default function Profile() {
   const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -15,6 +19,7 @@ export default function Profile() {
   const { username } = useParams();
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     const followingsArray = Array.isArray(currentUser.followings)
@@ -67,11 +72,47 @@ export default function Profile() {
     setFollowed(!followed);
   };
 
+  const handleEditMode = () => {
+    setEditMode(!editMode);
+  };
+
+  const handleInputChange = (e) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      await axios.put(`/users/${user._id}`, {
+        desc: user.desc,
+        city: user.city,
+        from: user.from,
+        relationship: user.relationship,
+        userId: currentUser._id,
+      });
+      console.log("Benutzerinformationen erfolgreich aktualisiert.");
+    } catch (error) {
+      console.error(
+        "Fehler beim Aktualisieren der Benutzerinformationen:",
+        error
+      );
+    }
+    setEditMode(false);
+  };
+
   return (
     <>
       <Navbar />
       <div className="profileContainer">
         <div className="profileMain">
+          <div className="editBtnContainer">
+            {user.username === currentUser.username && (
+              <EditIcon className="editBtn" onClick={handleEditMode} />
+            )}
+          </div>
+
           {user.username !== currentUser.username && (
             <button className="followBtn" onClick={handleClick}>
               {followed ? "Unfollow" : "Follow"}
@@ -91,10 +132,70 @@ export default function Profile() {
             </div>
             <div className="profileInfo">
               <h2 className="username">{user.username}</h2>
-              <p className="description">Description: {user.desc}</p>
-              <p className="userDetails">City: {user.city}</p>
-              <p className="userDetails">From: {user.from}</p>
-              <p className="userDetails">Relationship: {user.relationship}</p>
+              {editMode && user.username === currentUser.username ? (
+                <>
+                  <input
+                    type="text"
+                    className="description"
+                    name="desc"
+                    value={user.desc}
+                    onChange={handleInputChange}
+                  />
+                  <div className="locationContainer">
+                    <LocationOnIcon className="locationIcon" />
+                    <input
+                      type="text"
+                      className="userDetails"
+                      name="city"
+                      value={user.city}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="countryContainer">
+                    <PublicIcon className="countryIcon" />
+                    <input
+                      type="text"
+                      className="userDetails"
+                      name="from"
+                      value={user.from}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="relationshipContainer">
+                    <PeopleAltIcon className="relationshipIcon" />
+                    <input
+                      type="text"
+                      className="userDetails"
+                      name="relationship"
+                      value={user.relationship}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <button
+                    className="saveChangesBtn"
+                    onClick={handleSaveChanges}
+                  >
+                    Save Changes
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="description">{user.desc}</p>
+                  <br />
+                  <div className="locationContainer">
+                    <LocationOnIcon className="locationIcon" />
+                    <p className="userDetails">{user.city}</p>
+                  </div>
+                  <div className="countryContainer">
+                    <PublicIcon className="countryIcon" />
+                    <p className="userDetails"> {user.from}</p>
+                  </div>
+                  <div className="relationshipContainer">
+                    <PeopleAltIcon className="relationshipIcon" />
+                    <p className="userDetails">{user.relationship}</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <h2 id="friendstitle">Friends</h2>

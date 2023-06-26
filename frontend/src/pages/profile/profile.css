@@ -32,6 +32,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .profilePicture img {
@@ -51,12 +52,14 @@
   font-size: 16px;
   color: gray;
   margin-top: 5px;
+  border: none;
 }
 
 .userDetails {
   font-size: 14px;
+  width: 100%;
   color: #777777;
-  margin-top: 10px;
+  margin-left: 5px;
 }
 
 .friendsContainer {
@@ -136,6 +139,7 @@
   color: #555555;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-left: auto;
 }
 
 .followBtn:hover {
@@ -144,4 +148,100 @@
 
 .followBtn svg {
   margin-right: 4px;
+}
+
+.profileContainer {
+  position: relative;
+}
+
+.profileInfo {
+  position: relative;
+}
+
+.username {
+  margin-bottom: 10px;
+}
+
+.userDetails {
+  border: none;
+  padding: 5px 0;
+  width: 100%;
+}
+.description {
+  width: 325%;
+  font-size: 14px;
+}
+
+.saveChangesBtn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.saveChangesBtn:hover {
+  background-color: #45a049;
+}
+
+.editBtn {
+  background-color: transparent;
+  border: none;
+  color: #777;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-end;
+  margin-right: 15px;
+}
+
+.editBtn:hover {
+  color: #333;
+}
+
+.editBtnContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: auto;
+}
+
+.locationContainer {
+  display: flex;
+  align-items: center;
+}
+
+.locationIcon {
+  margin-right: 5px;
+}
+
+.countryContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.countryIcon {
+  margin-right: 5px;
+  align-self: center;
+}
+.relationshipContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.relationshipIcon {
+  margin-right: 5px;
+}
+
+.relationshipContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.relationshipIcon {
+  margin-right: 5px;
 }

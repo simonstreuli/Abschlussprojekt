@@ -101,3 +101,7 @@
   color: #555555;
   cursor: pointer;
 }
+
+.postLiked {
+  color: red;
+}

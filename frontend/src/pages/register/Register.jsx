@@ -9,7 +9,6 @@ export default function Register() {
   const password = useRef();
   const username = useRef();
   const password2 = useRef();
-  const desc = useRef();
 
   const handleClick = async (event) => {
     event.preventDefault();
@@ -67,12 +66,7 @@ export default function Register() {
               className="loginInput"
               ref={password2}
             />
-            <input
-              type="text"
-              placeholder="Profile Description"
-              className="loginInput"
-              ref={desc}
-            />
+
             <button className="loginButton" type="submit">
               Sign Up
             </button>

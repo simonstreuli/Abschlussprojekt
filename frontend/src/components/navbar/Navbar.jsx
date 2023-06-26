@@ -35,9 +35,11 @@ export default function Navbar() {
       </div>
       <div className="navbarRight">
         <div className="navbar-icons">
-          <div className="navbar-icon" onClick={handleLogout}>
-            <LogoutIcon />
-          </div>
+          <Link to="/" className="navbar-link">
+            <div className="navbar-icon" onClick={handleLogout}>
+              <LogoutIcon />
+            </div>
+          </Link>
         </div>
         <Link to={`/profile/${user.username}`}>
           <img

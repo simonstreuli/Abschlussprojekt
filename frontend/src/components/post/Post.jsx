@@ -1,9 +1,5 @@
 import "./post.css";
-import {
-  MoreVert,
-  FavoriteBorderOutlined,
-  ThumbUpOutlined,
-} from "@material-ui/icons";
+import { MoreVert, FavoriteBorderOutlined, Favorite } from "@material-ui/icons";
 import axios from "axios";
 import { format } from "timeago.js";
 import { useState, useEffect, useContext } from "react";
@@ -11,7 +7,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Post({ post }) {
-  console.log(post);
   const { user: currentUser } = useContext(AuthContext);
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
@@ -28,7 +23,6 @@ export default function Post({ post }) {
     fetchUser();
   }, [post.userId, currentUser._id]);
 
-  // check if post is already liked
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes]);
@@ -40,6 +34,7 @@ export default function Post({ post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -59,21 +54,28 @@ export default function Post({ post }) {
             <span className="postUsername">{user.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
-          <div className="postTopRight"></div>
-          <MoreVert></MoreVert>
+          <div className="postTopRight">
+            <MoreVert />
+          </div>
         </div>
 
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
           <img className="postImg" src={publicFolder + post.img} alt="" />
         </div>
+
         <div className="postBottom">
           <div className="postBottomLeft">
-            <FavoriteBorderOutlined onClick={likeHandler} />
-            <span className="postLikeCounter">{like} person liked</span>
+            {isLiked ? (
+              <Favorite className="postLiked" onClick={likeHandler} />
+            ) : (
+              <FavoriteBorderOutlined onClick={likeHandler} />
+            )}
+            <span className="postLikeCounter">{like} people liked</span>
           </div>
-          <div className="postBottomRight"></div>
-          <span className="postCommentText">{post.comment} Comments</span>
+          <div className="postBottomRight">
+            <span className="postCommentText">{post.comment} Comments</span>
+          </div>
         </div>
       </div>
     </div>

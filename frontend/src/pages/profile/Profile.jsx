@@ -18,16 +18,17 @@ export default function Profile() {
   const [friends, setFriends] = useState([]);
   const { username } = useParams();
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [followed, setFollowed] = useState(false);
+  const [followed, setFollowed] = useState(
+    currentUser.followings.includes(user._id)
+  );
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    const followingsArray = Array.isArray(currentUser.followings)
-      ? currentUser.followings
-      : [];
-    const isFollowing = followingsArray.includes(user?.id);
-    setFollowed(isFollowing);
-  }, [currentUser, user.id]);
+    if (currentUser && user._id) {
+      const isFollowing = currentUser.followings.includes(user._id);
+      setFollowed(isFollowing);
+    }
+  }, [currentUser, user._id]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -40,12 +41,16 @@ export default function Profile() {
     };
     fetchUser();
   }, [username]);
+  console.log(user._id);
 
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
-        setFriends(friendList.data);
+        if (user._id) {
+          const friendList = await axios.get("/users/friends/" + user._id);
+          setFriends(friendList.data);
+          console.log("yes");
+        }
       } catch (err) {
         console.log(err);
       }
@@ -53,6 +58,9 @@ export default function Profile() {
     getFriends();
   }, [user]);
 
+  console.log(
+    "User profil id: " + user._id + " Current user id" + currentUser._id
+  );
   const handleClick = async () => {
     try {
       if (followed) {
@@ -101,6 +109,7 @@ export default function Profile() {
     }
     setEditMode(false);
   };
+  console.log(followed);
 
   return (
     <>
@@ -180,6 +189,12 @@ export default function Profile() {
                 </>
               ) : (
                 <>
+                  <div className="followersContainer">
+                    <p className="userDetails">
+                      Followers: {user.followers?.length + 1}
+                    </p>
+                  </div>
+
                   <p className="description">{user.desc}</p>
                   <br />
                   <div className="locationContainer">
@@ -198,7 +213,7 @@ export default function Profile() {
               )}
             </div>
           </div>
-          <h2 id="friendstitle">Friends</h2>
+          {friends.length > 0 && <h2 id="friendstitle">Friends</h2>}
           <div className="friendsContainer">
             <div className="friendsList">
               {friends.map((friend) => (

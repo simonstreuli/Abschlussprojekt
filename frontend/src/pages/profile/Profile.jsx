@@ -224,7 +224,7 @@ export default function Profile() {
                     <img
                       className="profilePicture"
                       src={
-                        user.profilePicture
+                        friend.profilePicture
                           ? publicFolder + friend.profilePicture
                           : publicFolder + "person/noAvatar.png"
                       }

@@ -1,9 +1,4 @@
-import {
-  AddPhotoAlternateOutlined,
-  LabelOutlined,
-  RoomOutlined,
-  EmojiEmotionsOutlined,
-} from "@material-ui/icons";
+import { AddPhotoAlternateOutlined } from "@material-ui/icons";
 import "./share.css";
 import { useContext } from "react";
 import { useRef, useState } from "react";
@@ -38,6 +33,8 @@ export default function Share() {
       window.location.reload();
     } catch (err) {}
   };
+  console.log("test" + user.profilePicture + user.username);
+  console.log(user);
 
   return (
     <div className="share">

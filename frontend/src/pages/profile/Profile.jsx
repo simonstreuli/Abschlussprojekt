@@ -59,7 +59,7 @@ export default function Profile() {
   }, [user]);
 
   console.log(
-    "User profil id: " + user._id + " Current user id" + currentUser._id
+    "User profil id: " + user._id + " Current user id: " + currentUser._id
   );
   const handleClick = async () => {
     try {
@@ -78,6 +78,7 @@ export default function Profile() {
       console.log("Error");
     }
     setFollowed(!followed);
+    window.location.reload();
   };
 
   const handleEditMode = () => {
@@ -109,7 +110,7 @@ export default function Profile() {
     }
     setEditMode(false);
   };
-  console.log(followed);
+  console.log("profile " + user);
 
   return (
     <>
@@ -132,11 +133,12 @@ export default function Profile() {
             <div className="profilePicture">
               <img
                 src={
-                  user.profileUserImg
-                    ? publicFolder + user.profileUserImg
+                  user.profilePicture
+                    ? publicFolder + user.profilePicture
                     : publicFolder + "person/noAvatar.png"
                 }
-                alt="Profile"
+                alt=""
+                className="postProfileImg"
               />
             </div>
             <div className="profileInfo">
@@ -191,7 +193,7 @@ export default function Profile() {
                 <>
                   <div className="followersContainer">
                     <p className="userDetails">
-                      Followers: {user.followers?.length + 1}
+                      Followers: {user.followers?.length}
                     </p>
                   </div>
 
@@ -213,7 +215,7 @@ export default function Profile() {
               )}
             </div>
           </div>
-          {friends.length > 0 && <h2 id="friendstitle">Friends</h2>}
+          {friends.length > 0 && <h2 id="friendstitle">Following</h2>}
           <div className="friendsContainer">
             <div className="friendsList">
               {friends.map((friend) => (

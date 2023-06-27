@@ -30,11 +30,13 @@ export default function Post({ post }) {
   const likeHandler = () => {
     try {
       axios.put(`/posts/${post._id}/like`, { userId: currentUser._id });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("test");
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-
   return (
     <div className="post">
       <div className="postWrapper">
@@ -66,12 +68,13 @@ export default function Post({ post }) {
 
         <div className="postBottom">
           <div className="postBottomLeft">
+            {" "}
             {isLiked ? (
               <Favorite className="postLiked" onClick={likeHandler} />
             ) : (
               <FavoriteBorderOutlined onClick={likeHandler} />
-            )}
-            <span className="postLikeCounter">{like} people liked</span>
+            )}{" "}
+            <span className="postLikeCounter">{like}</span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText">{post.comment} Comments</span>

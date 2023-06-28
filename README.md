@@ -36,7 +36,7 @@ To run LinkUp you need to follow the following steps:
 3. Create .env File and provide the Database connection with the URL of your database:
 
    ```sh
-   mongodb+srv://<user>:<password>@cluster0.phhwfao.mongodb.net/?retryWrites=true&w=majority
+   MONGO_URL=mongodb+srv://<user>:<password>@cluster0.phhwfao.mongodb.net/?retryWrites=true&w=majority
    ```
 
 4. Run the backend with the following command:

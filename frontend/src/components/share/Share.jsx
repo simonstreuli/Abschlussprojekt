@@ -11,8 +11,8 @@ export default function Share() {
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState(null);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = async (event) => {
+    event.preventDefault();
     const newPost = {
       userId: user._id,
       desc: desc.current.value,

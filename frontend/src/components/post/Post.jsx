@@ -33,7 +33,6 @@ export default function Post({ post }) {
     } catch (error) {
       console.log(error);
     }
-    console.log("test");
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };

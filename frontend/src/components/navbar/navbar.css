@@ -1,4 +1,7 @@
 @media (max-width: 768px) {
+  .logo-img {
+    display: none;
+  }
   .navbarCenter {
     display: none;
   }

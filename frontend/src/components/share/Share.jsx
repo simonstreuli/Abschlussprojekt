@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Share() {
   const desc = useRef();
@@ -26,29 +27,31 @@ export default function Share() {
       console.log(newPost);
       try {
         await axios.post("/upload", data);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     }
     try {
       await axios.post("/posts", newPost);
       window.location.reload();
     } catch (err) {}
   };
-  console.log("test" + user.profilePicture + user.username);
-  console.log(user);
 
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img
-            className="shareProfileImg"
-            src={
-              user.profilePicture
-                ? publicFolder + user.profilePicture
-                : publicFolder + "person/noAvatar.png"
-            }
-            alt=""
-          />
+          <Link to={`/profile/${user.username}`}>
+            <img
+              className="shareProfileImg"
+              src={
+                user.profilePicture
+                  ? publicFolder + user.profilePicture
+                  : publicFolder + "person/noAvatar.png"
+              }
+              alt=""
+            />
+          </Link>
           <input
             type="text"
             placeholder="What's going on right now"
@@ -68,7 +71,7 @@ export default function Share() {
                 type="file"
                 accept=".jpg, .png, jpeg"
                 id="file"
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={(event) => setFile(event.target.files[0])}
               />
             </div>
           </label>

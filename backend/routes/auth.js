@@ -20,7 +20,7 @@ router.post("/register", async (req, res) => {
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("Error: " + err);
   }
 });
 
@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 
     return res.status(200).json(user);
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json("Error: " + err);
   }
 });
 

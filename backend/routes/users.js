@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 //update user
-router.put("/:id", async (req, res, next) => {
-  if (req.body.userId === req.params.id || req.body.isAdmin) {
+router.put("/:id", async (req, res) => {
+  if (req.body.userId === req.params.id) {
     if (req.body.password) {
       try {
         const salt = await bcrypt.genSalt(10);
@@ -19,7 +20,7 @@ router.put("/:id", async (req, res, next) => {
       });
       res.status(200).json("Account updated");
     } catch (err) {
-      return res.status(500).json(err);
+      return res.status(500).json("Error: " + err);
     }
   } else {
     return res.status(403).json("You can only update your account");
@@ -33,7 +34,7 @@ router.delete("/:id", async (req, res) => {
       const user = await User.findByIdAndDelete(req.params.id);
       res.status(200).json("Account deleted");
     } catch (err) {
-      return res.status(500).json(err);
+      return res.status(500).json("Error: " + err);
     }
   } else {
     return res.status(403).json("You can only delete your account");
@@ -41,14 +42,11 @@ router.delete("/:id", async (req, res) => {
 });
 
 //get user by id or by usename
-const mongoose = require("mongoose");
-
 router.get("/", async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
   let user;
   if (userId) {
-    // Überprüfen, ob userId eine gültige ObjectId ist
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json("Ungültige Benutzer-ID");
     }
@@ -57,7 +55,6 @@ router.get("/", async (req, res) => {
     user = await User.findOne({ username: username });
   }
   if (!user) {
-    // Benutzer nicht gefunden
     return res.status(404).json("Benutzer nicht gefunden");
   }
   const { password, updatedAt, ...other } = user._doc;
@@ -78,7 +75,7 @@ router.put("/:id/follow", async (req, res) => {
         res.status(403).json("you allready follow this user");
       }
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json("Error: " + err);
     }
   } else {
     res.status(403).json("you cant follow yourself");
@@ -99,7 +96,7 @@ router.put("/:id/unfollow", async (req, res) => {
         res.status(403).json("you dont follow this user");
       }
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json("Error: " + err);
     }
   } else {
     res.status(403).json("you cant unfollow yourself");
@@ -121,7 +118,7 @@ router.get("/friends/:userId", async (req, res) => {
     });
     res.status(200).json(friendList);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("Error: " + err);
   }
 });
 

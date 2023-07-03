@@ -1,12 +1,10 @@
 import "./explorefeed.css";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Share from "../share/Share";
 import Post from "../post/Post";
 import axios from "axios";
-import { AuthContext } from "../../context/AuthContext";
 
 export default function Explorefeed({}) {
-  const { user } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   console.log(posts);
 

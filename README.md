@@ -4,6 +4,7 @@
 **by Simon Streuli**
 
 LinkUp is a simple social media app that allows users to connect with each other, share content, and build friendships. It provides a platform for users to customize their profiles, post updates, and interact with others.
+<br/>
 <img src="./images/linkup-background.png" alt="Background" style="width: 100%; max-width: 500px;">
 
 ## ⚙️ Prerequisites
